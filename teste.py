@@ -1,6 +1,7 @@
 from cliente import Cliente
 from veiculos import Veiculo
-from alugueis import Aluguel
+from aluguel import Aluguel
+
 
 print(f"------------------------")
 cliente1 = Cliente("Fulano", "111.111.111-00")
@@ -19,8 +20,7 @@ print(f"Categoria: {veiculo1.categoria}")
 print(f"Alugado: {veiculo1.alugado}")
 print(f"------------------------")
 
-alugado(cliente1,True)
-alugado(veiculo1, True)
+Aluguel(veiculo1, cliente1)
 
 print(f"------------------------")
 print(f"Status cliente alugado: {cliente1.alugado}")
