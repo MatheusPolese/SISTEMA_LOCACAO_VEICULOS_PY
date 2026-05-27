@@ -7,12 +7,21 @@ class Veiculo:
         self.__modalidade = modalidade##CNH A, B, C, D, E
         self.__categoria = categoria##definara o preço do aluguel
         self.__alugado = False
+        self.__locatarioAtual = "Ninguem"
     
     
 
     @property
     def alugado(self):
         return self.__alugado
+    
+    @property
+    def locatarioAtual(self):
+        return self.__locatarioAtual
+
+    @locatarioAtual.setter
+    def locatarioAtual(self, novocliente):
+        self.__locatarioAtual = novocliente
     
     @alugado.setter
     def alugado(self, status):
@@ -51,5 +60,6 @@ class Veiculo:
         print(f"Modalidade: {self.__modalidade}")
         print(f"Categoria: {self.__categoria}")
         print(f"Alugado: {self.__alugado}")
+        print(f"Atual locatario: {self.__locatarioAtual}")
         print(f"|------------------------|")
     
