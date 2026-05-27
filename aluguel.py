@@ -8,7 +8,7 @@ class Aluguel:
 
         veiculo.alugado = True
         cliente.alugado = True
-
+        ##verificar se carro ja esta alugado e mudar para cliente poder alugar 1 ou mais carros
     @property
     def comanda(self):
         return self.__comanda

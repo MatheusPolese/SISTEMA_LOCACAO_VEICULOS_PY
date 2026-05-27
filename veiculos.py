@@ -42,3 +42,14 @@ class Veiculo:
     def categoria(self):
         return self.__categoria
 
+    def exibir_veiculo(self):
+        print(f"|-----Ficha Veiculo-----|")
+        print(f"Placa: {self.__placa}")
+        print(f"Modelo: {self.__marca}")
+        print(f"Modelo: {self.__modelo}")
+        print(f"Ano: {self.__ano}")
+        print(f"Modalidade: {self.__modalidade}")
+        print(f"Categoria: {self.__categoria}")
+        print(f"Alugado: {self.__alugado}")
+        print(f"|------------------------|")
+    

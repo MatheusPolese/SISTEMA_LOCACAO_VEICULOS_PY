@@ -11,11 +11,17 @@ class Garagem:
 
     def mostrar_garagem(self):
         print("Lista de veiculos para aluguel:\n")
-        for veiculo1 in  self.__lista_dos_veiculos:
-            print(f"{veiculo.marca} {veiculo.modelo} - {veiculo.ano}")
-
+        for veiculo in  self.__lista_dos_veiculos:
+            if veiculo.alugado == False:
+                print(f"{veiculo.marca} {veiculo.modelo} - {veiculo.ano}")
         print("-----------------------------------------------------")
-        
+
+    def mostrar_alugados(self):
+        print("Lista de veiculos alugados:\n")
+        for veiculo in  self.__lista_dos_veiculos:
+            if veiculo.alugado == True:
+                print(f"{veiculo.marca} {veiculo.modelo} - {veiculo.ano}")
+        print("-----------------------------------------------------")
 
     
 

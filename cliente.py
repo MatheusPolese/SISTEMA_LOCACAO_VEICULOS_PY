@@ -28,3 +28,11 @@ class Cliente:
     def codigo(self):
         return self.__codigo ##atruibir codigo aleatorio
 
+    def exibir_cliente(self):
+        print(f"|-----Ficha Cliente-----|")
+        print(f"Nome: {self.__nome}")
+        print(f"Cpf: {self.__cpf}")
+        print(f"codigo: {self.__codigo}")
+        print(f"Alugado: {self.__alugado}")
+        print(f"|------------------------|")
+    
