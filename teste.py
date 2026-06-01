@@ -2,6 +2,7 @@ from cliente import Cliente
 from veiculos import Veiculo
 from aluguel import Aluguel
 from garagem import Garagem
+from banco_de_clientes import Banco_clientes
 
 print("\nCria cliente 1:")
 cliente1 = Cliente("Fulano", "111.111.111-00")
@@ -43,6 +44,9 @@ garagem1.mostrar_garagem()
 print("\nmostra veiculos alugados:")
 garagem1.mostrar_alugados()
 
+print("\nmostra clientes da empresa:")
+
+cliente1.mostra_clientes()
 
 
 

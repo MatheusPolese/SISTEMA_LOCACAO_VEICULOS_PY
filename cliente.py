@@ -5,15 +5,16 @@ class Cliente:
         self.__codigo = f"{random.randint(0, 9999):04d}"##atruibir codigo aleatorio
         self.__nome = nome
         self.__cpf = cpf
-        self.__alugado = False
-
+        self.__alugado = 0
+        
     @property
     def alugado(self):
         return self.__alugado
     
     @alugado.setter
     def alugado(self, status):
-        self.__alugado = status
+        if status == True:
+            self.__alugado = self.__alugado + 1
         return self.__alugado
 
     @property
@@ -27,6 +28,7 @@ class Cliente:
     @property
     def codigo(self):
         return self.__codigo ##atruibir codigo aleatorio
+    
 
     def exibir_cliente(self):
         print(f"|-----Ficha Cliente-----|")
@@ -35,4 +37,7 @@ class Cliente:
         print(f"codigo: {self.__codigo}")
         print(f"Alugado: {self.__alugado}")
         print(f"|------------------------|")
+
     
+
+
