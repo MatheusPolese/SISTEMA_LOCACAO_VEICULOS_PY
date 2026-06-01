@@ -1,4 +1,5 @@
 from veiculos import Veiculo
+from aluguel import Aluguel
 
 #classe para contar quantos carros estão dispo
 class Garagem:
@@ -16,8 +17,9 @@ class Garagem:
             if veiculo.alugado == False:
                 print(f"|{veiculo.marca} | {veiculo.modelo} - {veiculo.ano} | Disponivel para locação")
             if veiculo.alugado == True:
-                print(f"|{veiculo.marca} | {veiculo.modelo} - {veiculo.ano} | Indisponivel para locação")
+                print(f"|{veiculo.marca} | {veiculo.modelo} - {veiculo.ano} | {veiculo.Aluguel.data_retirada}")
         print("------------------------")
+
 
 
     

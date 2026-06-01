@@ -2,7 +2,6 @@ import random
 
 class Cliente:
     def __init__(self, nome, cpf):
-        self.__codigo = f"{random.randint(0, 9999):04d}"##atruibir codigo aleatorio
         self.__nome = nome
         self.__cpf = cpf
         self.__alugado = 0
@@ -24,17 +23,12 @@ class Cliente:
     @property
     def cpf(self):
         return self.__cpf
-
-    @property
-    def codigo(self):
-        return self.__codigo ##atruibir codigo aleatorio
     
 
     def exibir_cliente(self):
         print(f"|-----Ficha Cliente-----|")
         print(f"Nome: {self.__nome}")
         print(f"Cpf: {self.__cpf}")
-        print(f"codigo: {self.__codigo}")
         print(f"Alugado: {self.__alugado}")
         print(f"|------------------------|")
 

@@ -23,14 +23,11 @@ garagem.adiciona_veiculo(veiculo2)
 garagem.adiciona_veiculo(veiculo3)
 
 
-Aluguel(veiculo1, cliente1)
-Aluguel(veiculo1, cliente1)
-Aluguel(veiculo2, cliente1)
-Aluguel(veiculo3, cliente1)
+Aluguel(veiculo1, cliente1, "1/6/2026", "10/6/2026")
+
 
 print("\nmostra veiculos na garagem:")
 garagem.mostrar_garagem()
 
 print("\nmostra clientes da empresa:")
 Banco_de_dados.mostra_clientes()
-

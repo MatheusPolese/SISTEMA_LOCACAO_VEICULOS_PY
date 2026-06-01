@@ -1,8 +1,8 @@
 from cliente import Cliente
 from veiculos import Veiculo
 from aluguel import Aluguel
-from garagem import Garagem
-from banco_de_clientes import Banco_clientes
+from Banco_veiculos import Garagem
+from Banco_clientes import Banco_clientes
 
 print("\nCria cliente 1:")
 cliente1 = Cliente("Fulano", "111.111.111-00")
