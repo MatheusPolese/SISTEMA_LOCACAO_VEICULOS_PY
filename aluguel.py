@@ -8,9 +8,9 @@ class Aluguel:
         self.__cliente = cliente
         self.__data_retirada = self.__validar_data(data_retirada)
         self.__data_devolucao = self.__validar_data(data_devolucao)
-        self.__seguro = False
+        ##self.__seguro = False
 
-
+       ## if verifica_disponibilidade == True
         if veiculo.alugado == True:
             print(f"Não é possivel alugar o veiculo, o {veiculo.modelo} ja esta alugado")
             return
@@ -21,6 +21,7 @@ class Aluguel:
             print(f"{veiculo.modelo} foi locado com sucesso por {cliente.nome}")
             ##verificar se carro ja esta alugado e mudar para cliente poder alugar 1 ou mais carros
     
+
     def __validar_data(self,data):
         try:
             dataFormatada = datetime.strptime(data, "%d/%m/%Y")
@@ -34,7 +35,14 @@ class Aluguel:
     
     @property
     def data_devolucao(self):
-        return self.data_devolucao.strftime("%d/%m/%Y")  ##colocar para padrao brasileiro
+        return self.__data_devolucao.strftime("%d/%m/%Y")  ##colocar para padrao brasileiro
     
+    @property
+    def veiculo(self):
+        return self.__veiculo
+        
+    @property
+    def cliente(self):
+        return self.__cliente
     ##Adicionar função de agendar aluguel
     

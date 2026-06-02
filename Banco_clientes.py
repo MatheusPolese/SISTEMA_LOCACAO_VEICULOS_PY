@@ -1,6 +1,6 @@
 from cliente import Cliente 
 
-class Banco_clientes:
+class banco_clientes:
     def __init__(self):
         self.__lista_dos_clientes = []
         
