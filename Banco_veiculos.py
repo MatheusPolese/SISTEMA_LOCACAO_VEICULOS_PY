@@ -14,10 +14,13 @@ class banco_veiculos:
         print("Lista de veiculos para aluguel:")
         print("------------------------")
         for veiculo in  self.__lista_dos_veiculos:
-            if veiculo.alugado == False:
+            '''if veiculo.alugado == False:
                 print(f"|{veiculo.marca} | {veiculo.modelo} - {veiculo.ano} | Disponivel para locação")
             if veiculo.alugado == True:
                 print(f"|{veiculo.marca} | {veiculo.modelo} - {veiculo.ano} | Indisponivel para locação")
+                '''
+            print(f"|{veiculo.marca} | {veiculo.modelo} {veiculo.ano} - Placa: {veiculo.placa} ")
+
         print("------------------------")
 
 
