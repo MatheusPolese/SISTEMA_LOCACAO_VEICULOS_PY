@@ -1,4 +1,4 @@
-from cliente import Cliente , banco_clientes
+from cliente import Cliente , banco_clientes, Cliente_Fisico, Cliente_juridico
 from veiculos import Veiculo ,  banco_veiculos
 from aluguel import Aluguel , banco_aluguel
 #from Banco_veiculos import banco_veiculos
@@ -16,8 +16,8 @@ bv.adiciona_veiculo(veiculo1)
 bv.adiciona_veiculo(veiculo2)
 bv.adiciona_veiculo(veiculo3)
 
-cliente = Cliente("Matheus", "321.321.312-00")
-cliente1 = Cliente("Maria", "000.000.000-00")
+cliente = Cliente_Fisico("Matheus", "321.321.312-00")
+cliente1 = Cliente_juridico("Empresa", "000.000.000/1000-00")
 bc.adiciona_cliente(cliente)
 bc.adiciona_cliente(cliente1)
 
