@@ -1,8 +1,8 @@
-from cliente import Cliente
-from veiculos import Veiculo
+from cliente import Cliente , banco_clientes
+from veiculos import Veiculo ,  banco_veiculos
 from aluguel import Aluguel , banco_aluguel
-from Banco_veiculos import banco_veiculos
-from Banco_clientes import banco_clientes
+#from Banco_veiculos import banco_veiculos
+#from Banco_clientes import banco_clientes
 
 ba = banco_aluguel()
 bv = banco_veiculos()
@@ -26,5 +26,7 @@ aluguel2 = Aluguel(veiculo1, cliente1, ba, "11/6/2026","23/6/2026")
 
 cliente.exibir_cliente()
 veiculo1.exibir_veiculo()
+
+bc.mostra_clientes()
 ba.mostra_alugueis()
 bv.mostrar_garagem()
