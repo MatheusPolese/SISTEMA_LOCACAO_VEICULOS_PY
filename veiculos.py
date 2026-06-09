@@ -10,27 +10,20 @@ class banco_veiculos:
         print("Lista de veiculos para aluguel:")
         print("------------------------")
         for veiculo in  self.__lista_dos_veiculos:
-            '''if veiculo.alugado == False:
-                print(f"|{veiculo.marca} | {veiculo.modelo} - {veiculo.ano} | Disponivel para locação")
-            if veiculo.alugado == True:
-                print(f"|{veiculo.marca} | {veiculo.modelo} - {veiculo.ano} | Indisponivel para locação")
-                '''
             print(f"|{veiculo.marca} | {veiculo.modelo} {veiculo.ano} - Placa: {veiculo.placa} ")
-
         print("------------------------")
 
 
 class Veiculo:
-    def __init__(self, placa, modelo, marca, ano, modalidade, categoria):
+    def __init__(self, placa, modelo, marca, ano, modalidade, precodiaria: int ):
         self.__placa = placa
         self.__modelo = modelo
         self.__marca = marca
         self.__ano = ano
         self.__modalidade = modalidade##CNH A, B, C, D, E
-        self.__categoria = categoria##definara o preço do aluguel
+        self.__precodiaria = precodiaria##definara o preço do aluguel
         self.__alugado = False
         self.__locatarioAtual = "Ninguem"
-    
     
 
     @property
@@ -70,8 +63,8 @@ class Veiculo:
         return self.__modalidade
 
     @property
-    def categoria(self):
-        return self.__categoria
+    def precodiaria(self):
+        return self.__precodiaria
 
     def exibir_veiculo(self):
         print(f"|-----Ficha Veiculo-----|")
@@ -80,7 +73,7 @@ class Veiculo:
         print(f"Modelo: {self.__modelo}")
         print(f"Ano: {self.__ano}")
         print(f"Modalidade: {self.__modalidade}")
-        print(f"Categoria: {self.__categoria}")
+        print(f"Categoria: {self.__precodiaria}")
         print(f"Alugado: {self.__alugado}")
         print(f"Atual locatario: {self.__locatarioAtual}")
         print(f"|------------------------|")

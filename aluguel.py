@@ -12,7 +12,6 @@ class banco_aluguel:
     def adiciona_locacao(self, loc):
         self.__banco_dados_locacoes.append(loc)
 
-
     def mostra_alugueis(self):
         print("Lista dos alugueis:")
         print("------------------------")
@@ -20,31 +19,22 @@ class banco_aluguel:
                 print(f"| Veiculo {loc.veiculo.modelo} | Cliente {loc.cliente.nome} | Data retirada: {loc.data_retirada} | Data retirada: {loc.data_devolucao}")
         print("------------------------")
 
-
-
 class Aluguel:
     def __init__(self, veiculo, cliente, ba, data_retirada, data_devolucao):
         self.__veiculo = veiculo
         self.__cliente = cliente
-        self.__ba = ba ##banco de dados dos alugueis
+        self.__ba = ba 
         self.__data_retirada = self.__validar_data(data_retirada)
         self.__data_devolucao = self.__validar_data(data_devolucao)
-        ##self.__seguro = False
-
-
-
         disp = True
         locacoes = ba.lista_locacoes()
+
         for alg in locacoes:
             if alg.veiculo.placa == veiculo.placa:
-                #print("cheguei aqui")
                 nomeV = veiculo.modelo
                 dI = alg.data_retirada 
                 dF = alg.data_devolucao 
-                #print(f"data inicio carro anterior{dI}")
-                #print(f"data fim carro anterior{dF}")
-                #print(data_retirada)
-                #print(data_devolucao)
+               
                 if ((dI <= data_retirada <= dF)  or  (dI <= data_devolucao <= dF) or (data_retirada <= dI <= data_devolucao) or (data_retirada <= dF <= data_devolucao) ):
                     print (f"O veiculo {nomeV} esta indisponivel do periodo de {dI} até {dF}")
                     disp = False
@@ -53,11 +43,13 @@ class Aluguel:
                     disp = True
 
         if (disp == True):
-            print (f"O veiculo {veiculo.modelo} esta disponivel do periodo de {data_retirada} até {data_devolucao} e esta agendada a locacao")
+            dias_alocado = (self.__data_devolucao - self.__data_retirada).days
+            preco_locacao = dias_alocado * veiculo.precodiaria
+
+            print (f"{veiculo.modelo} {veiculo.ano} - {veiculo.placa}| Alocado por {dias_alocado} dias | Custo diario: R$ {veiculo.precodiaria} | Custo Total: R$ {preco_locacao}\n")
+
             ba.adiciona_locacao(self)
             cliente.alugado = True
-
-            ##verificar se carro ja esta alugado e mudar para cliente poder alugar 1 ou mais carros
     
 
     def __validar_data(self,data):
@@ -78,6 +70,7 @@ class Aluguel:
     @property
     def veiculo(self):
         return self.__veiculo
+
         
     @property
     def cliente(self):

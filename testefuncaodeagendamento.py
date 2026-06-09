@@ -1,17 +1,15 @@
 from cliente import Cliente , banco_clientes, Cliente_Fisico, Cliente_juridico
 from veiculos import Veiculo ,  banco_veiculos
 from aluguel import Aluguel , banco_aluguel
-#from Banco_veiculos import banco_veiculos
-#from Banco_clientes import banco_clientes
 
 ba = banco_aluguel()
 bv = banco_veiculos()
 bc = banco_clientes()
 
 
-veiculo1 = Veiculo("XYZ-1234","Astra","Chevrolet","2001","B","C")
-veiculo2 = Veiculo("ABC-9876","Gol","Volwskwagem","2011","B","C")
-veiculo3 = Veiculo("RTB-9876","Kombi","Volwskwagem","1980","B","C")
+veiculo1 = Veiculo("XYZ-1234","Astra","Chevrolet","2001","B",100)
+veiculo2 = Veiculo("ABC-9876","Gol","Volwskwagem","2011","B",120)
+veiculo3 = Veiculo("RTB-9876","Kombi","Volwskwagem","1980","B",100)
 bv.adiciona_veiculo(veiculo1)
 bv.adiciona_veiculo(veiculo2)
 bv.adiciona_veiculo(veiculo3)
