@@ -73,7 +73,7 @@ class Veiculo:
         print(f"Modelo: {self.__modelo}")
         print(f"Ano: {self.__ano}")
         print(f"Modalidade: {self.__modalidade}")
-        print(f"Categoria: {self.__precodiaria}")
+        print(f"Preco diaria: R$ {self.__precodiaria}")
         print(f"Alugado: {self.__alugado}")
         print(f"Atual locatario: {self.__locatarioAtual}")
         print(f"|------------------------|")
