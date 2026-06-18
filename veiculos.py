@@ -13,6 +13,24 @@ class banco_veiculos:
             print(f"|{veiculo.marca} | {veiculo.modelo} {veiculo.ano} - Placa: {veiculo.placa} ")
         print("------------------------")
 
+    def exibir_veiculo(self, id):
+        print("------------------------")
+        for veiculo in  self.__lista_dos_veiculos:
+            if veiculo.placa == id:
+                print("------------------------")
+                print(f"|-----Ficha Veiculo-----|")
+                print(f"Placa: {veiculo.placa}")
+                print(f"Modelo: {veiculo.marca}")
+                print(f"Modelo: {veiculo.modelo}")
+                print(f"Ano: {veiculo.ano}")
+                print(f"Modalidade: {veiculo.modalidade}")
+                print(f"Preco diaria: R$ {veiculo.precodiaria}")
+                print(f"Alugado: {veiculo.alugado}")
+                print(f"Atual locatario: {veiculo.locatarioAtual}")
+                print(f"|------------------------|")
+
+
+        
 
 class Veiculo:
     def __init__(self, placa, modelo, marca, ano, modalidade, precodiaria: int ):
@@ -66,7 +84,7 @@ class Veiculo:
     def precodiaria(self):
         return self.__precodiaria
 
-    def exibir_veiculo(self):
+    '''def exibir_veiculo(self):
         print(f"|-----Ficha Veiculo-----|")
         print(f"Placa: {self.__placa}")
         print(f"Modelo: {self.__marca}")
@@ -78,3 +96,4 @@ class Veiculo:
         print(f"Atual locatario: {self.__locatarioAtual}")
         print(f"|------------------------|")
     
+'''
