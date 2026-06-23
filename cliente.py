@@ -13,90 +13,87 @@ class banco_clientes:
         print("------------------------")
 
     def procura_cliente(self, id):
-        print("------------------------")
         for cliente in self.__lista_dos_clientes:
-            if cliente.cpf == id:
+            if isinstance(cliente, Cliente_Fisico) and cliente.cpf == id:
                 return cliente
-            elif cliente.cnpj == id:
+            elif isinstance(cliente, Cliente_juridico) and cliente.cnpj == id:
                 return cliente
-        print("Este CPF não esta cadastrado, por favor realize o cadastro antes de alocar um veiculo!")
-        return 0
             
+        print("Este CPF não esta cadastrado, por favor realize o cadastro antes de alocar um veiculo!")
+        return None
 
-    def exibir_info(self, id):
-        print("------------------------")
-        for cliente in self.__lista_dos_clientes:
-            if cliente.cpf == id:
-                print(f"|-----Ficha Cliente-----|")
-                print(f"Nome: {cliente.nome}")
-                print(f"CPF: {cliente.cpf}")
-                print(f"|------------------------|")
-            elif cliente.cnpj == id:
-                print(f"|-----Ficha Cliente-----|")
-                print(f"Nome: {cliente.nome}")
-                print(f"CPF: {cliente.cnpj}")
-                print(f"|------------------------|")
-
+    def exibir_info(self, clienteinfo):
+        print(f"|-----Ficha Cliente-----|")
+        print(f"Nome: {clienteinfo.nome}")
+        print(f"Documento: {clienteinfo.cpf}")
+        print(f"quantos veiculos o cliente ja alugou: {clienteinfo.alugado}")
+        print(f"|------------------------|")
+    
 
 from abc import ABC, abstractmethod
 class Cliente(ABC):
-    def __init__(self, nome, cpf):
-        self._nome = nome
-        self._alugado = 0
+    def __init__(self, nome, email):
+        self.__nome = nome
+        self.__email = None
+        self.email = email
+        self.__alugado = 0
         
     @property
     def alugado(self):
-        return self._alugado
+        return self.__alugado
     
     @alugado.setter
     def alugado(self, status):
         if status == True:
-            self._alugado = self._alugado + 1
-        return self._alugado
+            self.__alugado = self.__alugado + 1
+        return self.__alugado
 
     @property
     def nome(self):
-        return self._nome
+        return self.__nome
+
+    @property
+    def email(self):
+        return self.__email
     
-    @abstractmethod
-    def exibir_cliente(self):
-        pass
+    @email.setter
+    def email(self, testeemail):
+        if "@" in testeemail and testeemail.split("@")[1] == "gmail.com":
+            self.__email = testeemail
+        else:
+            raise ValueError("E-mail inválido! O final precisa ser @gmail.com")
             
 
 
-# 2. Definição da Subclasse (Classe Filha)
-# Pessoa_Fisica herda de Pessoa
 class Cliente_Fisico(Cliente):
-    def __init__(self, nome, cpf):
-        # Chama o construtor da classe pai (Pessoa) para inicializar nome e
-        super().__init__(nome, cpf)
-        # Adiciona um atributo específico da subclasse
+    def __init__(self, nome, email, cpf):
+        super().__init__(nome, email)
         self.__cpf = cpf
-
-    def exibir_cliente(self):
-        print(f"|-----Ficha Cliente-----|")
-        print(f"Nome: {self._nome}")
-        print(f"CPF: {self._cpf}")
-        print(f"Alugado: {self._alugado}")
-        print(f"|------------------------|")
-
+    
     @property
     def cpf(self):
         return self.__cpf
-    
-class Cliente_juridico(Cliente):
-    def __init__(self, nome, cnpj):
-        # Chama o construtor da classe pai (Pessoa) para inicializar nome e
-        super().__init__(nome, cnpj)
-        # Adiciona um atributo específico da subclasse
-        self._cnpj = cnpj
 
     def exibir_cliente(self):
         print(f"|-----Ficha Cliente-----|")
-        print(f"Nome: {self._nome}")
-        print(f"CNPJ: {self._cnpj}")
-        print(f"Alugado: {self._alugado}")
+        print(f"Nome: {self.nome}")
+        print(f"E-mail: {self.email}")        
+        print(f"CPF: {self.__cpf}")
         print(f"|------------------------|")
+    
+class Cliente_juridico(Cliente):
+    def __init__(self, nome, email, cnpj):
+        super().__init__(nome, email)
+        self.__cnpj = cnpj
+
     @property
-    def cpf(self):
+    def cnpj(self):
         return self.__cnpj
+    
+
+    def exibir_cliente(self):
+        print(f"|-----Ficha Cliente-----|")
+        print(f"Nome: {self.nome}")
+        print(f"E-mail: {self.email}")      
+        print(f"CNPJ: {self.__cnpj}")
+        print(f"|------------------------|")

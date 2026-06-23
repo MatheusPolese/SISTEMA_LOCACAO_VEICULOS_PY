@@ -13,14 +13,14 @@ bv.adiciona_veiculo(veiculo1)
 bv.adiciona_veiculo(veiculo2)
 bv.adiciona_veiculo(veiculo3)
 
-cliente = Cliente_Fisico("Matheus", "321.321.312-00")
-cliente1 = Cliente_juridico("Empresa", "000.000.000/1000-00")
+cliente = Cliente_Fisico("Matheus","matheus@gmail.com","321.321.312-00")
+cliente1 = Cliente_juridico("Empresa","empresa@gmail.com","000.000.000/1000-00")
 bc.adiciona_cliente(cliente)
 bc.adiciona_cliente(cliente1)
 
 menu = 0
 while (menu > 3 or menu < 1):
-    print("|-------- MENU --------|")
+    print("\n|-------- MENU --------|")
     print("| [1] - VEICULOS       |")
     print("| [2] - CLIENTES       |")
     print("| [3] - LOCAÇÕES       |")
@@ -64,6 +64,7 @@ while (menu > 3 or menu < 1):
             clientes_menu = int(input("Digite a opção: "))
             if (clientes_menu > 3 or clientes_menu < 1):
                 print("Por favor! Digite uma das opções do menu")
+
             elif clientes_menu == 1:
                 nome = str(input("Digite o nome do cliente: "))
                 cpf = str(input("Digite o cpf do cliente: "))
@@ -71,6 +72,7 @@ while (menu > 3 or menu < 1):
                 bc.adiciona_cliente(cliente)
                 print("Cliente cadastrado com sucesso!")
                 menu = 0 
+
             elif clientes_menu == 2:
                 nome = str(input("Digite o nome da empresa: "))
                 cnpj = str(input("Digite o cpnj do cliente: "))
@@ -78,9 +80,11 @@ while (menu > 3 or menu < 1):
                 bc.adiciona_cliente(cliente)
                 print("Cliente cadastrado com sucesso!")
                 menu = 0 
+
             elif clientes_menu == 3:
                 id = str(input("Digite o cpf ou cnpj do cliente: "))
-                bc.exibir_info(id)
+                clienteinfo = bc.procura_cliente(id)
+                bc.exibir_info(clienteinfo)
                 menu = 0  
 
     elif menu == 3:
