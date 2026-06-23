@@ -5,6 +5,19 @@ from aluguel import Aluguel , banco_aluguel
 ba = banco_aluguel()
 bv = banco_veiculos()
 bc = banco_clientes()
+
+veiculo1 = Veiculo("XYZ-1234","Astra","Chevrolet","2001","B",100)
+veiculo2 = Veiculo("ABC-9876","Gol","Volwskwagem","2011","B",120)
+veiculo3 = Veiculo("RTB-9876","Kombi","Volwskwagem","1980","B",100)
+bv.adiciona_veiculo(veiculo1)
+bv.adiciona_veiculo(veiculo2)
+bv.adiciona_veiculo(veiculo3)
+
+cliente = Cliente_Fisico("Matheus", "321.321.312-00")
+cliente1 = Cliente_juridico("Empresa", "000.000.000/1000-00")
+bc.adiciona_cliente(cliente)
+bc.adiciona_cliente(cliente1)
+
 menu = 0
 while (menu > 3 or menu < 1):
     print("|-------- MENU --------|")
@@ -67,45 +80,28 @@ while (menu > 3 or menu < 1):
                 menu = 0 
             elif clientes_menu == 3:
                 id = str(input("Digite o cpf ou cnpj do cliente: "))
-                bc.exibir_informacoes(id)
+                bc.exibir_info(id)
                 menu = 0  
 
-
     elif menu == 3:
-        loc_menu = 0
-        while (loc_menu > 3 or loc_menu < 1):
-            print("|---- MENU LOCACOES ----|")
-            print("| [1] - ORÇAR LOC       |")
-            print("| [2] - ALOCAR          |")
-            print("| [3] - VERIFICA DISP   |")
-            print("|-----------------------|")
-            loc_menu = int(input("Digite a opção: "))
+        print("|---- OPÇÕES DE ALOCAÇÃO ----|")
+        i = bv.mostrar_garagem()
+        op = 0
+        while (0 <= op or op > i):
+            op = int(input("Escolha o veiculo: "))
+            veiculo = bv.procura_veiculo(op)
+            cpf = str(input("Digite seu cpf: "))
+            cliente = bc.procura_cliente(cpf)  
+            if cliente == 0:
+                menu = 0
+                break         
+            data1 = str(input("Digite a data de retirada: "))
+            data2 = str(input("Digite a data de devolução: "))
+            aluguel1 = Aluguel(veiculo, cliente,  ba, data1, data2)
+            menu = 0
+        
 
 
 
 
-
-'''
-
-veiculo1 = Veiculo("XYZ-1234","Astra","Chevrolet","2001","B",100)
-veiculo2 = Veiculo("ABC-9876","Gol","Volwskwagem","2011","B",120)
-veiculo3 = Veiculo("RTB-9876","Kombi","Volwskwagem","1980","B",100)
-bv.adiciona_veiculo(veiculo1)
-bv.adiciona_veiculo(veiculo2)
-bv.adiciona_veiculo(veiculo3)
-
-cliente = Cliente_Fisico("Matheus", "321.321.312-00")
-cliente1 = Cliente_juridico("Empresa", "000.000.000/1000-00")
-bc.adiciona_cliente(cliente)
-bc.adiciona_cliente(cliente1)
-
-aluguel1 = Aluguel(veiculo1, cliente,  ba, "2/6/2026","12/6/2026")
-aluguel2 = Aluguel(veiculo1, cliente1, ba, "11/6/2026","23/6/2026")
-
-cliente.exibir_cliente()
-veiculo1.exibir_veiculo()
-
-bc.mostra_clientes()
-ba.mostra_alugueis()
-bv.mostrar_garagem()
-'''
+        

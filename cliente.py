@@ -12,6 +12,32 @@ class banco_clientes:
                 print(f"| Cliente {cliente.nome} | Veiculos alugados {cliente.alugado}")
         print("------------------------")
 
+    def procura_cliente(self, id):
+        print("------------------------")
+        for cliente in self.__lista_dos_clientes:
+            if cliente.cpf == id:
+                return cliente
+            elif cliente.cnpj == id:
+                return cliente
+        print("Este CPF não esta cadastrado, por favor realize o cadastro antes de alocar um veiculo!")
+        return 0
+            
+
+    def exibir_info(self, id):
+        print("------------------------")
+        for cliente in self.__lista_dos_clientes:
+            if cliente.cpf == id:
+                print(f"|-----Ficha Cliente-----|")
+                print(f"Nome: {cliente.nome}")
+                print(f"CPF: {cliente.cpf}")
+                print(f"|------------------------|")
+            elif cliente.cnpj == id:
+                print(f"|-----Ficha Cliente-----|")
+                print(f"Nome: {cliente.nome}")
+                print(f"CPF: {cliente.cnpj}")
+                print(f"|------------------------|")
+
+
 from abc import ABC, abstractmethod
 class Cliente(ABC):
     def __init__(self, nome, cpf):
@@ -35,12 +61,7 @@ class Cliente(ABC):
     @abstractmethod
     def exibir_cliente(self):
         pass
-        '''print(f"|-----Ficha Cliente-----|")
-        print(f"Nome: {self.__nome}")
-        print(f"Alugado: {self.__alugado}")
-        print(f"|------------------------|")'''
-
-    
+            
 
 
 # 2. Definição da Subclasse (Classe Filha)
@@ -50,7 +71,7 @@ class Cliente_Fisico(Cliente):
         # Chama o construtor da classe pai (Pessoa) para inicializar nome e
         super().__init__(nome, cpf)
         # Adiciona um atributo específico da subclasse
-        self._cpf = cpf
+        self.__cpf = cpf
 
     def exibir_cliente(self):
         print(f"|-----Ficha Cliente-----|")
@@ -58,6 +79,10 @@ class Cliente_Fisico(Cliente):
         print(f"CPF: {self._cpf}")
         print(f"Alugado: {self._alugado}")
         print(f"|------------------------|")
+
+    @property
+    def cpf(self):
+        return self.__cpf
     
 class Cliente_juridico(Cliente):
     def __init__(self, nome, cnpj):
@@ -69,7 +94,9 @@ class Cliente_juridico(Cliente):
     def exibir_cliente(self):
         print(f"|-----Ficha Cliente-----|")
         print(f"Nome: {self._nome}")
-        print(f"CPF: {self._cnpj}")
+        print(f"CNPJ: {self._cnpj}")
         print(f"Alugado: {self._alugado}")
         print(f"|------------------------|")
-
+    @property
+    def cpf(self):
+        return self.__cnpj
