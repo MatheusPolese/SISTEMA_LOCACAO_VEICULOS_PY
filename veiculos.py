@@ -12,12 +12,17 @@ class banco_veiculos:
     def adiciona_veiculo(self, veiculo):
         self.__lista_dos_veiculos.append(veiculo)
 
-    def mostrar_garagem(self):
+    def mostrar_garagem(self, banco_aluguel):
         print("Lista de veiculos para aluguel:")
         print("------------------------")
         i = 1
-        for veiculo in  self.__lista_dos_veiculos:
-            print(f"[{i}]|Custo diaria: R$ {veiculo.precodiaria}|{veiculo.marca} {veiculo.modelo} {veiculo.ano} ")
+        for veic in  self.__lista_dos_veiculos:
+            print(f"[{i}]|Custo diaria: R$ {veic.precodiaria}|{veic.marca} {veic.modelo} {veic.ano} ")
+            if veic.alugado == True:
+                
+                for loc in banco_aluguel.lista_locacoes():
+                    if loc.veiculo.placa == veic.placa:
+                        print(f" Indisponivel de: {loc.data_retirada} até {loc.data_devolucao}")
             i+=1
         print("------------------------")
         return (i-1)
@@ -32,10 +37,9 @@ class banco_veiculos:
                 print(f"Ano: {veiculo.ano}")
                 print(f"Modalidade: {veiculo.modalidade}")
                 print(f"Preco diaria: R$ {veiculo.precodiaria}")
-                print(f"Alugado: {veiculo.alugado}")
-                print(f"Atual locatario: {veiculo.locatarioAtual}")
                 print(f"|------------------------|")  
-                
+
+# PRODUTO ABSTRATO
 from abc import ABC, abstractmethod
 class Veiculo(ABC):
     def __init__(self, placa, modelo, marca, ano: int, modalidade ):
@@ -45,7 +49,6 @@ class Veiculo(ABC):
         self.__ano = ano
         self.__modalidade = modalidade##CNH A, B, C, D, E
         self.__alugado = False
-        self.__locatarioAtual = "Ninguem"
     
     @abstractmethod
     def diaria(self):
@@ -58,14 +61,7 @@ class Veiculo(ABC):
     @property
     def alugado(self):
         return self.__alugado
-    
-    @property
-    def locatarioAtual(self):
-        return self.__locatarioAtual
 
-    @locatarioAtual.setter
-    def locatarioAtual(self, novocliente):
-        self.__locatarioAtual = novocliente
     
     @alugado.setter
     def alugado(self, status):
@@ -100,10 +96,9 @@ class Veiculo(ABC):
             print(f"Ano: {self.__ano}")
             print(f"Modalidade: {self.__modalidade}")
             print(f"Preço Diária: R$ {self.precodiaria:.2f}")  # Pega o valor correto da subclasse
-            print(f"Alugado: {self.__alugado}")
-            print(f"Atual locatario: {self.__locatarioAtual}")
             print(f"|------------------------|")
 
+# PRODUTOS CONCRETOS
 class CarroEconomico(Veiculo):
     def diaria(self):
         return 120.00
@@ -116,9 +111,9 @@ class VAN(Veiculo):
     def diaria(self):
         return 500.00
     
-
+# CRIADOR ABSTRATO (DECLARA O Factory Method)class CriadorVeiculo(ABC):
+@abstractmethod
 class CriadorVeiculo(ABC):
-    @abstractmethod
     def addveiculo(self, placa, modelo, marca, ano, modalidade) -> Veiculo:
         pass
 
@@ -135,20 +130,3 @@ class CriadorVAN(CriadorVeiculo):
     def addveiculo(self, placa, modelo, marca, ano, modalidade):
         return VAN(placa, modelo, marca, ano, modalidade)
     
-
-
-garagem = banco_veiculos()
-
-# Usando as fábricas para criar os veículos (Sem passar o preço manualmente)
-fabrica_suv = CriadorSUV()
-suv = fabrica_suv.addveiculo("ABC-1234", "Compass", "Jeep", 2024, "B")
-
-fabrica_van = CriadorVAN()
-van = fabrica_van.addveiculo("XYZ-9876", "備Transit", "Ford", 2025, "D")
-
-# Adicionando na garagem
-garagem.adiciona_veiculo(suv)
-garagem.adiciona_veiculo(van)
-
-# Mostrando os veículos com seus preços definidos pelas subclasses
-garagem.mostrar_garagem()

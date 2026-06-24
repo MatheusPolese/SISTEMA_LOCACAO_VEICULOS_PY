@@ -1,14 +1,17 @@
 from cliente import Cliente , banco_clientes, Cliente_Fisico, Cliente_juridico
-from veiculos import Veiculo ,  banco_veiculos
+from veiculos import banco_veiculos, CriadorSUV, CriadorVAN, CriadorEconomico
 from aluguel import Aluguel , banco_aluguel
+
 
 ba = banco_aluguel()
 bv = banco_veiculos()
 bc = banco_clientes()
 
-veiculo1 = Veiculo("XYZ-1234","Astra","Chevrolet","2001","B",100)
-veiculo2 = Veiculo("ABC-9876","Gol","Volwskwagem","2011","B",120)
-veiculo3 = Veiculo("RTB-9876","Kombi","Volwskwagem","1980","B",100)
+
+veiculo1 = CriadorVAN().addveiculo("XYZ-1234","Sprinter","Mercedes-Benz","2017","C")
+veiculo3 = CriadorSUV().addveiculo("RTB-9876","Kicks","Nissan","2020","B")
+veiculo2 = CriadorSUV().addveiculo("ABC-9876","Gol","Volwskwagem","2011","B")
+
 bv.adiciona_veiculo(veiculo1)
 bv.adiciona_veiculo(veiculo2)
 bv.adiciona_veiculo(veiculo3)
@@ -17,6 +20,7 @@ cliente = Cliente_Fisico("Matheus","matheus@gmail.com","321.321.312-00")
 cliente1 = Cliente_juridico("Empresa","empresa@gmail.com","000.000.000/1000-00")
 bc.adiciona_cliente(cliente)
 bc.adiciona_cliente(cliente1)
+aluguel2 = Aluguel(veiculo1, cliente,  ba, "26/6/2026", "5/7/2026")
 
 menu = 0
 while (menu > 3 or menu < 1):
@@ -39,16 +43,44 @@ while (menu > 3 or menu < 1):
             if (veiculos_menu > 3 or veiculos_menu < 1):
                 print("Por favor! Digite uma das opções do menu")
             elif veiculos_menu == 1:
-                placa = str(input("Digite a placa do veiculo: "))
-                modelo = str(input("Digite o modelo do veiculo: "))
-                marca = str(input("Digite a marca do veiculo: "))
-                ano = str(input("Digite o ano do veiculo: "))
-                porte = str(input("Digite a o porte do veiculo (categoria CNH): "))
-                custo_diario = float(input("Digite o custo da diaria do veiculo: "))
-                veiculo1 = Veiculo(placa,modelo,marca,ano,porte,custo_diario)
-                bv.adiciona_veiculo(veiculo1)
-                print("Veiculo cadastrado com sucesso!")
-                menu = 0
+                tipo_veiculo = 0
+                while (tipo_veiculo > 3 or tipo_veiculo < 1):
+                    print("|ESCOLHA A OPÇÃO DO TIPO|")
+                    print("| [1] - VAN             |")
+                    print("| [2] - SUV             |")
+                    print("| [3] - ECONOMICO       |")
+                    print("|-----------------------|")
+                    tipo_veiculo = int(input("Digite a opção: "))
+                    if tipo_veiculo == 1:
+                        placa = str(input("Digite a placa do veiculo: "))
+                        modelo = str(input("Digite o modelo do veiculo: "))
+                        marca = str(input("Digite a marca do veiculo: "))
+                        ano = str(input("Digite o ano do veiculo: "))
+                        porte = str(input("Digite a o porte do veiculo (categoria CNH): "))
+                        van = CriadorVAN().addveiculo(placa,modelo,marca,ano,porte)
+                        bv.adiciona_veiculo(van)
+                        print("Veiculo cadastrado com sucesso!")
+                        menu = 0
+                    elif tipo_veiculo == 2:
+                        placa = str(input("Digite a placa do veiculo: "))
+                        modelo = str(input("Digite o modelo do veiculo: "))
+                        marca = str(input("Digite a marca do veiculo: "))
+                        ano = str(input("Digite o ano do veiculo: "))
+                        porte = str(input("Digite a o porte do veiculo (categoria CNH): "))
+                        suv = CriadorSUV().addveiculo(placa,modelo,marca,ano,porte)
+                        bv.adiciona_veiculo(suv)
+                        print("Veiculo cadastrado com sucesso!")
+                        menu = 0
+                    elif tipo_veiculo == 3:
+                        placa = str(input("Digite a placa do veiculo: "))
+                        modelo = str(input("Digite o modelo do veiculo: "))
+                        marca = str(input("Digite a marca do veiculo: "))
+                        ano = str(input("Digite o ano do veiculo: "))
+                        porte = str(input("Digite a o porte do veiculo (categoria CNH): "))
+                        economico = CriadorEconomico().addveiculo(placa,modelo,marca,ano,porte)
+                        bv.adiciona_veiculo(economico)
+                        print("Veiculo cadastrado com sucesso!")
+                        menu = 0               
             elif veiculos_menu == 2:
                 placa = str(input("Digite a placa do veiculo: "))
                 bv.exibir_veiculo(placa)
@@ -67,16 +99,18 @@ while (menu > 3 or menu < 1):
 
             elif clientes_menu == 1:
                 nome = str(input("Digite o nome do cliente: "))
+                email = str(input("Digite o E-mail do cliente: "))
                 cpf = str(input("Digite o cpf do cliente: "))
-                cliente = Cliente_Fisico(nome, cpf)
+                cliente = Cliente_Fisico(nome,email , cpf)
                 bc.adiciona_cliente(cliente)
                 print("Cliente cadastrado com sucesso!")
                 menu = 0 
 
             elif clientes_menu == 2:
                 nome = str(input("Digite o nome da empresa: "))
+                email = str(input("Digite o E-mail do cliente: "))
                 cnpj = str(input("Digite o cpnj do cliente: "))
-                cliente = Cliente_juridico(nome, cnpj)
+                cliente = Cliente_juridico(nome, email, cnpj)
                 bc.adiciona_cliente(cliente)
                 print("Cliente cadastrado com sucesso!")
                 menu = 0 
@@ -89,20 +123,24 @@ while (menu > 3 or menu < 1):
 
     elif menu == 3:
         print("|---- OPÇÕES DE ALOCAÇÃO ----|")
-        i = bv.mostrar_garagem()
+        i = bv.mostrar_garagem(ba)
         op = 0
         while (0 <= op or op > i):
             op = int(input("Escolha o veiculo: "))
-            veiculo = bv.procura_veiculo(op)
-            cpf = str(input("Digite seu cpf: "))
-            cliente = bc.procura_cliente(cpf)  
-            if cliente == 0:
-                menu = 0
-                break         
+            veiculo = bv.procura_veiculo(op)    
             data1 = str(input("Digite a data de retirada: "))
             data2 = str(input("Digite a data de devolução: "))
-            aluguel1 = Aluguel(veiculo, cliente,  ba, data1, data2)
+            doc = str(input("Digite seu documento: "))
+            cliente = bc.procura_cliente(doc)  
+            if cliente == 0:
+                menu = 0
+                op =-1
+                break   
+            if menu != 0:  
+                aluguel1 = Aluguel(veiculo, cliente,  ba, data1, data2)
+            op =-1
             menu = 0
+            
         
 
 

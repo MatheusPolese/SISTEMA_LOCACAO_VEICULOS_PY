@@ -46,7 +46,6 @@ class Cliente(ABC):
     def alugado(self, status):
         if status == True:
             self.__alugado = self.__alugado + 1
-        return self.__alugado
 
     @property
     def nome(self):
